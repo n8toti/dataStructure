@@ -1,0 +1,51 @@
+
+   //start at root to iterate
+   Node* cur = root;
+   
+   //new node
+   Node* newNode = new Node;
+   
+   //set values all at once
+   *newNode = {elemToInsert, nullptr, nullptr};
+   
+   //if theres no root new value becomes root
+   if (cur == nullptr)
+   {
+      root = newNode;
+      cur = root;
+   }
+   else
+   {
+      //parent node to current
+      Node* parent = nullptr;
+      if (cur->data == elemToInsert)
+      {
+         cerr << "Element " << elemToInsert << " is already in the list. Duplicates are not allowed." << endl;
+      }
+      else
+      {
+         while(cur != nullptr)
+         {
+            if (elemToInsert < cur->data)
+            {
+               parent = cur;
+               cur = cur->llink;
+            }
+            else
+            {
+               parent = cur;
+               cur = cur->rlink;
+            }
+         }
+         //check parent value 
+         if (elemToInsert < parent->data)
+         {
+            parent->llink = newNode;
+         }
+         else
+         {
+            parent->rlink = newNode;
+         }
+      }
+   }
+   ++totalNodes;
